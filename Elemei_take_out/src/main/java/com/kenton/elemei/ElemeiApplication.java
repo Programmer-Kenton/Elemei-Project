@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author: Kenton
@@ -15,6 +16,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 // 添加扫描器
 @ServletComponentScan
+// 开启事务支持
+@EnableTransactionManagement
 public class ElemeiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ElemeiApplication.class,args);

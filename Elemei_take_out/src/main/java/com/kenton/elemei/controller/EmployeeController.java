@@ -99,16 +99,17 @@ public class EmployeeController {
         // 设置初始密码 需要进行md5加密处理
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        // employee.setCreateTime(LocalDateTime.now());
+        // employee.setUpdateTime(LocalDateTime.now());
 
         // 获得当前登录用户的id
         // request.getAttribute()只能在一个request内有效，如果重定向回客户端，将取不到值。
         // request.getSession()可以帮你得到HttpSession类型的对象，通常称之为session对象，session对象的作用域为一次
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        log.info("编号是:{}",empId);
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+        // Long empId = (Long) request.getSession().getAttribute("employee");
+        // log.info("编号是:{}",empId);
+        // employee.setCreateUser(empId);
+        // employee.setUpdateUser(empId);
+
         employeeService.save(employee);
         return R.success("新增员工成功");
     }

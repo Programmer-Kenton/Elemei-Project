@@ -51,7 +51,8 @@ public class LoginCheckFilter implements Filter {
                 "/employee/logout",
                 // 展示的静态图片 不需要检查
                 "/backend/**",
-                "/front/**"
+                "/front/**",
+                "/common/**"
         };
 
         // 2.判断本次请求是否需要处理

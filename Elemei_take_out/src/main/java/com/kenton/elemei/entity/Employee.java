@@ -35,8 +35,12 @@ public class Employee implements Serializable {
 
     private Integer status;
 
+    // 插入时填充字段
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+    // 插入和更新时填充字段
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
     //该注解用于标识非主键的字段。将数据库列与 JavaBean 中的属性进行映射
