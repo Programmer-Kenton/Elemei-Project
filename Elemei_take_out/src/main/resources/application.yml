@@ -10,6 +10,23 @@ spring:
       url: jdbc:mysql://192.168.211.130:3306/Elemei?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: root
       password: java
+
+  mail:
+    # 使用smtp协议
+    host: smtp.163.com
+    port: 465
+    username: syscola@163.com
+    # password: xiaohuo001.
+    password: JRWRJNZNTZCGMGSG
+    default-encoding: UTF-8
+    protocol: smtp
+    test-connection: false
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
 mybatis-plus:
   configuration:
     # 在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
@@ -20,3 +37,4 @@ mybatis-plus:
       id-type: ASSIGN_ID
 elemei:
   path: D:\Java_Study\IDEA_Commerce\IDEA-Cache\
+

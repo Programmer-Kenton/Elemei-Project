@@ -16,4 +16,7 @@ public interface DishService extends IService<Dish> {
 
     // 添加根据id查询菜品信息的方法 用于菜品修改
     DishDto getByIdWithFlavor(Long id);
+
+    // 更新菜品信息的同时更新口味信息
+    void updateWithFlavor(DishDto dishDto);
 }
