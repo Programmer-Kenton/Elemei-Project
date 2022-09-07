@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.kenton.elemei.common.R;
 import com.kenton.elemei.entity.User;
+import com.kenton.elemei.service.MailService;
 import com.kenton.elemei.service.UserService;
 import com.kenton.elemei.utils.SMSUtils;
 import com.kenton.elemei.utils.ValidateCodeUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+
+import static java.awt.Color.red;
 
 /**
  * @author: Kenton
@@ -30,6 +35,19 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Autowired
+    private MailService mailService;
+
+    @Value("${spring.mail.username}")
+    private String from;
+
+    // @Value("1911139867@qq.com")
+    @Value("1441630907@qq.com")
+    private String to;
+
+    @Value("饿了美外卖平台登录验证码")
+    private String subject;
+
     /**
      * 发送手机验证码
      * @param user
@@ -37,6 +55,7 @@ public class UserController {
      */
     @PostMapping("/sendMsg")
     public R<String> sendMsg(@RequestBody User user, HttpSession session){
+
         // 获取手机号
         String phone = user.getPhone();
 
@@ -47,6 +66,12 @@ public class UserController {
             log.info("本次验证码 = {}",code);
             // 调用阿里云提供的短信服务API完成发送短信
             // SMSUtils.sendMessage("饿了美外卖","","17622339366","xxxx");
+
+            // 发送登录验证码到用户的邮箱
+            String tip = "请您妥善保管";
+            String text = "周小姐您好,您的登录验证码为:" + "<font color=\"red\",size=\"8\" >"+ code + "</font>" + tip;
+            mailService.sendSimpleTextMail(from,to,subject,text);
+            log.info("邮箱信息发送成功");
 
             // 将生成的验证码保存到Session中
             session.setAttribute(phone,code);
